@@ -1,5 +1,4 @@
-const MINIMAL_SPEED = 1
-const MAXIMAL_SPEED = 15
+import { MINIMAL_SPEED, MAXIMAL_SPEED } from './consts'
 
 export const changeSpeed = (newSpeed: number): number => {
   newSpeed = Math.round(newSpeed)
@@ -14,4 +13,14 @@ export const incrementRate = (rate: number): number => {
 
 export const decrementRate = (rate: number): number => {
   return changeSpeed(rate - 1)
+}
+
+export const obtainRateFromVideo = (): number => {
+  const video = document.querySelector('video')
+  if (!video) {
+    console.error('No video element found')
+    return 1
+  }
+
+  return video.playbackRate | 1
 }

@@ -1,12 +1,16 @@
 import { getButton, appendElements, getSpan } from './htmlUtils'
-import { incrementRate, decrementRate } from './playbackRate'
-import { obtainRate } from './rateManager'
-
-const YT_CONTROL_DIV_CLASS = '.ytp-left-controls'
-const LABEL = 'timelapser-label'
-const LEFT_BTN = 'left-btn'
-const RIGHT_BTN = 'right-btn'
-const RESET_BTN = 'reset-btn'
+import {
+  incrementRate,
+  decrementRate,
+  obtainRateFromVideo,
+} from './playbackRate'
+import {
+  YT_CONTROL_DIV_CLASS,
+  LEFT_BTN,
+  RIGHT_BTN,
+  LABEL,
+  RESET_BTN,
+} from './consts'
 
 let controls: HTMLDivElement | null
 let label: HTMLSpanElement | null
@@ -33,7 +37,7 @@ const fetchElements = (): number => {
 }
 
 const setupControlElements = () => {
-  rate = obtainRate()
+  rate = obtainRateFromVideo()
 
   const btnLeft = getButton(LEFT_BTN, '<b><</b>', clickDecrement)
   const btnRight = getButton(RIGHT_BTN, '<b>></b>', clickIncrement)
@@ -69,6 +73,7 @@ const clickReset = () => {
 
 const updateRate = (newRate: number) => {
   const video = document.querySelector('video')
+
   if (!video) {
     console.error('No video element found')
     return
