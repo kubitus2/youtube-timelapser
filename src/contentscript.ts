@@ -20,6 +20,7 @@ class PlaybackController {
 
   public start() {
     window.addEventListener('yt-navigate-finish', this.onPageLoad.bind(this))
+    this.setKeybindings()
   }
 
   /*private onRPressed = (e: KeyboardEvent) => {
@@ -29,8 +30,22 @@ class PlaybackController {
     }
   }*/
 
+  private setKeybindings() {
+    const onKeypressed = (e: KeyboardEvent) => {
+      if (e.key === 'r') {
+        this.clickReset()
+      } else if (e.key === ',') {
+        this.clickDecrement()
+      } else if (e.key === '.') {
+        this.clickIncrement()
+      }
+    }
+
+    document.addEventListener('keyup', onKeypressed.bind(this))
+  }
+
   private setupControlElements(): void {
-    this.clearControlElements()
+    //this.clearControlElements()
     this.rate = obtainRateFromVideo()
 
     const btnLeft = getButton(
@@ -48,8 +63,6 @@ class PlaybackController {
       '<b>RESET</b>',
       this.clickReset.bind(this)
     )
-
-    //document.addEventListener('keyup', this.onRPressed.bind(this))
 
     const spanResponse = getSpan(LABEL, this.rate.toString())
 
