@@ -17,4 +17,8 @@ describe('Rate is modified', () => {
     const a = 2
     expect(changeSpeed(a + 1)).toBe(3)
   })
+  test('Rate is decreased', () => {
+    const a = 2
+    expect(changeSpeed(a - 1)).toBe(1)
+  })
 })
