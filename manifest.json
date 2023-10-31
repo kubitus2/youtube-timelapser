@@ -12,9 +12,11 @@
   },
   "content_scripts": [
     {
+      "html": "index.html",
       "matches": ["*://www.youtube.com/*"],
-      "js": ["js/contentscript.js"],
-      "css": ["styles.css"]
+      "js": ["dist/contentscript.js"],
+      "css": ["styles.css"],
+      "type": "module"
     }
   ]
 }

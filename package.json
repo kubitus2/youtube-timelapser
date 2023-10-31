@@ -4,15 +4,24 @@
   "description": "Simple Chrome add-on that allows for conveniently set youtube playback speed beyond usual 0.25-2 range. (Work in progress)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "build": "webpack --mode production"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^5.2.2"
+    "@types/jest": "^29.5.7",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "ts-loader": "^9.5.0",
+    "typescript": "^5.2.2",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
-    "@types/chrome": "^0.0.248"
+    "@types/chrome": "^0.0.248",
+    "ts-node": "^10.9.1"
   }
 }
