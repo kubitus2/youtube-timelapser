@@ -4,10 +4,15 @@ import { obtainRate } from './rateManager'
 
 const YT_CONTROL_DIV_CLASS = '.ytp-left-controls'
 const LABEL = 'timelapser-label'
+const LEFT_BTN = 'left-btn'
+const RIGHT_BTN = 'right-btn'
+const RESET_BTN = 'reset-btn'
 
 let controls: HTMLDivElement | null
 let label: HTMLSpanElement | null
 let rate = 1
+
+let addedElements: HTMLElement[] = []
 
 window.addEventListener('yt-navigate-finish', () => {
   console.log('New page loaded')
@@ -30,13 +35,18 @@ const fetchElements = (): number => {
 const setupControlElements = () => {
   rate = obtainRate()
 
-  const btnLeft = getButton('<b><</b>', clickDecrement)
-  const btnRight = getButton('<b>></b>', clickIncrement)
-  const resetBtn = getButton('<b>RESET</b>', clickReset)
+  const btnLeft = getButton(LEFT_BTN, '<b><</b>', clickDecrement)
+  const btnRight = getButton(RIGHT_BTN, '<b>></b>', clickIncrement)
+  const resetBtn = getButton(RESET_BTN, '<b>RESET</b>', clickReset)
 
-  label = getSpan(LABEL, rate.toString())
+  const spanResponse = getSpan(LABEL, rate.toString())
 
-  appendElements([btnLeft, label, btnRight, resetBtn], controls!)
+  label = spanResponse.element
+  if (!spanResponse.present) {
+    console.log(spanResponse.element)
+    addedElements = [btnLeft, spanResponse.element, btnRight, resetBtn]
+    appendElements(addedElements, controls!)
+  }
 }
 
 const clickDecrement = () => {
