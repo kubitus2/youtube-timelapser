@@ -1,0 +1,18 @@
+{
+  "name": "youtube-timelapser",
+  "version": "1.0.0",
+  "description": "Simple Chrome add-on that allows for conveniently set youtube playback speed beyond usual 0.25-2 range. (Work in progress)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@types/chrome": "^0.0.248"
+  }
+}

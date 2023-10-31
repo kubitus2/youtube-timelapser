@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube Timelapser",
+  "version": "1.0.0",
+  "icons": {
+    "32": "Icons/icon32.png"
+  },
+  "permissions": ["scripting", "activeTab"],
+  "background": {
+    "service-worker": "js/service-worker.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://www.youtube.com/*"],
+      "js": ["js/contentscript.js"],
+      "css": ["styles.css"]
+    }
+  ]
+}
