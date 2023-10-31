@@ -1,4 +1,4 @@
-import { getButton } from './htmlUtils'
+import { getButton, appendElements, getSpan } from './htmlUtils'
 import { incrementRate, decrementRate } from './playbackRate'
 import { obtainRate } from './rateManager'
 
@@ -6,7 +6,7 @@ const YT_CONTROL_DIV_CLASS = '.ytp-left-controls'
 const LABEL = 'timelapser-label'
 
 let controls: HTMLDivElement | null
-let label: HTMLDivElement | null
+let label: HTMLSpanElement | null
 let rate = 1
 
 window.addEventListener('yt-navigate-finish', () => {
@@ -29,17 +29,14 @@ const fetchElements = (): number => {
 
 const setupControlElements = () => {
   rate = obtainRate()
+
   const btnLeft = getButton('<b><</b>', clickDecrement)
   const btnRight = getButton('<b>></b>', clickIncrement)
   const resetBtn = getButton('<b>RESET</b>', clickReset)
-  label = document.createElement('div')
-  label.innerHTML = rate.toString()
-  label.id = LABEL
-  console.log(label.id)
-  controls?.appendChild(btnLeft)
-  controls?.appendChild(label)
-  controls?.appendChild(btnRight)
-  controls?.appendChild(resetBtn)
+
+  label = getSpan(LABEL, rate.toString())
+
+  appendElements([btnLeft, label, btnRight, resetBtn], controls!)
 }
 
 const clickDecrement = () => {

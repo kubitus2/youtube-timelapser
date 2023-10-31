@@ -7,3 +7,17 @@ export const getButton = (label: string, func: () => void) => {
 
   return btn
 }
+
+export const getSpan = (id: string, innerText: string) => {
+  const span = document.createElement('span')
+  span.innerHTML = innerText
+  span.id = innerText
+
+  return span
+}
+
+export const appendElements = (elements: Element[], parent = document.body) => {
+  elements.forEach(element => {
+    parent.appendChild(element)
+  })
+}

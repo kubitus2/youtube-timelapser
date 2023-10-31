@@ -3,20 +3,15 @@
   "name": "YouTube Timelapser",
   "version": "1.0.0",
   "icons": {
-    "32": "Icons/icon32.png"
+    "32": "Public/Icons/icon32.png"
   },
   "permissions": ["scripting", "activeTab"],
-  "background": {
-    "service-worker": "js/service-worker.js",
-    "type": "module"
-  },
   "content_scripts": [
     {
       "html": "index.html",
       "matches": ["*://www.youtube.com/*"],
       "js": ["dist/contentscript.js"],
-      "css": ["styles.css"],
-      "type": "module"
+      "css": ["Public/styles.css"]
     }
   ]
 }
