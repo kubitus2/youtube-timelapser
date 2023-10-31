@@ -5,11 +5,7 @@ import {
   LABEL,
   RESET_BTN,
 } from './consts'
-import {
-  incrementRate,
-  decrementRate,
-  obtainRateFromVideo,
-} from './playbackRate'
+import { changeSpeed, obtainRateFromVideo } from './playbackRate'
 import { getButton, appendElements, getSpan } from './htmlUtils'
 
 class PlaybackController {
@@ -22,13 +18,6 @@ class PlaybackController {
     window.addEventListener('yt-navigate-finish', this.onPageLoad.bind(this))
     this.setKeybindings()
   }
-
-  /*private onRPressed = (e: KeyboardEvent) => {
-    if (e.key === 'r' && e.key === 'r') {
-      console.log('r')
-      this.clickReset()
-    }
-  }*/
 
   private setKeybindings() {
     const onKeypressed = (e: KeyboardEvent) => {
@@ -45,7 +34,6 @@ class PlaybackController {
   }
 
   private setupControlElements(): void {
-    //this.clearControlElements()
     this.rate = obtainRateFromVideo()
 
     const btnLeft = getButton(
@@ -76,7 +64,7 @@ class PlaybackController {
   private fetchElements(): number {
     this.controls = document.querySelector(YT_CONTROL_DIV_CLASS)
     if (!this.controls) {
-      console.error('Control elements not found!')
+      console.error('Control elements container not found!')
       return -1
     }
 
@@ -84,13 +72,13 @@ class PlaybackController {
   }
 
   private clickDecrement() {
-    const newRate = decrementRate(this.rate)
+    const newRate = changeSpeed(this.rate - 1)
     this.rate = newRate
     this.updateRate(newRate)
   }
 
   private clickIncrement() {
-    const newRate = incrementRate(this.rate)
+    const newRate = changeSpeed(this.rate + 1)
     this.rate = newRate
 
     this.updateRate(newRate)
@@ -124,15 +112,6 @@ class PlaybackController {
     if (this.fetchElements() >= 0) {
       this.setupControlElements()
     }
-  }
-
-  private clearControlElements(): void {
-    this.addedElements.forEach(element => {
-      if (element.parentNode) {
-        element.parentNode.removeChild(element)
-      }
-    })
-    this.addedElements = []
   }
 }
 

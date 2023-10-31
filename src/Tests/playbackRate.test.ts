@@ -1,4 +1,4 @@
-import { changeSpeed, incrementRate, decrementRate } from '../playbackRate'
+import { changeSpeed } from '../playbackRate'
 
 describe('New rate should check range before returning', () => {
   test('Rate withing range should return the same value', () => {
@@ -14,6 +14,7 @@ describe('New rate should check range before returning', () => {
 
 describe('Rate is modified', () => {
   test('Rate is increased', () => {
-    expect(incrementRate(1)).toBe(2)
+    const a = 2
+    expect(changeSpeed(a + 1)).toBe(3)
   })
 })

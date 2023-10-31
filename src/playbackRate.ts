@@ -7,14 +7,6 @@ export const changeSpeed = (newSpeed: number): number => {
   return newSpeed
 }
 
-export const incrementRate = (rate: number): number => {
-  return changeSpeed(rate + 1)
-}
-
-export const decrementRate = (rate: number): number => {
-  return changeSpeed(rate - 1)
-}
-
 export const obtainRateFromVideo = (): number => {
   const video = document.querySelector('video')
   if (!video) {
